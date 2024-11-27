@@ -206,7 +206,7 @@ flowchart TD
 ```
 
 ### MATLAB Visualizations - визуализация
-Визуализация реализована в виде виджетов и графиков. Визуализация может быть приватной и публичной. Коды предоставлены в репозитории в соответствующих файлах. 
+Визуализация реализована в виде виджетов и графиков. Визуализация может быть приватной и публичной. Коды предоставлены в репозитории в соответствующих файлах по этому пути - [https://github.com/Avrikan/AirSpeak/tree/main/ThingSpeak/Apps/MATLAB Visualizations](https://github.com/Avrikan/AirSpeak/tree/main/ThingSpeak/Apps/MATLAB%20Visualizations)
 Результаты можно посмотреть в моём публичном канале [lida_weather_log_1min](https://thingspeak.mathworks.com/channels/1306405) 
 ![image_2.png](https://github.com/Avrikan/AirSpeak/blob/main/images/image_2.png)
 
