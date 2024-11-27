@@ -1,0 +1,18 @@
+﻿% Channel: lida_weather_log_1min
+readAPIKey = 'XXXXXXXXXXXXXXXX';
+readChannelID = 1306405; 
+TemperatureFieldID = 1; 
+Days = 7;
+
+[data, time] = thingSpeakRead(readChannelID, 'Fields', TemperatureFieldID, 'NumDays', Days, 'ReadKey',readAPIKey);
+dataSmooth = smoothdata(data,'movmean',100);
+temperatureMeanData = mean(data);
+
+% Visualize the data
+figure
+plot(time, dataSmooth,'Color',[0.9,0.1,0.1]);
+% ylabel('Temperature');
+title(strcat('Температура за ', num2str(Days, ' %d'), ' дней (smooth)'));
+
+txt = ['Средняя температура: ' num2str(temperatureMeanData, 2) '°C'];
+text(1,1,txt)

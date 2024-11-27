@@ -1,0 +1,38 @@
+﻿% Channel: lida_weather_log_1min
+readAPIKey = 'XXXXXXXXXXXXXXXX';
+readChannelID = 1306405;
+FieldID01 = 4;
+FieldID25 = 5;
+FieldID10 = 6;
+Days = 30;
+
+data = thingSpeakRead(readChannelID,'Fields',[FieldID01 FieldID25 FieldID10], ...
+                                               'NumDays', Days, ...
+                                               'ReadKey', readAPIKey);
+
+Dust01Data = data(:,1);
+Dust25Data = data(:,2);
+Dust10Data = data(:,3);
+
+z = Dust10Data;
+z = (z).^(1/3);
+response = z;
+nc = 16;
+offset = 1;
+c = response - min(response);
+c = round((nc-1-2*offset)*c/max(c)+1+offset);
+s = 5;
+
+% Visualize the data
+figure
+colormap turbo
+h = scatter3(Dust01Data,Dust25Data,Dust10Data,s,c,'filled');
+
+xlabel('1 мкм');
+ylabel('2.5 мкм');
+zlabel('10 мкм');
+%view(60,60);
+c = colorbar('Location', 'EastOutside', 'YTickLabel',...
+{});
+c.Label.String = 'Колличество пыли';
+title(strcat('Корреляция твёрдых частиц за ', num2str(Days, ' %d'), ' дней'));

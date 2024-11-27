@@ -1,0 +1,30 @@
+% Read from: lida_weather_log_1min
+readChannelID = 1306405; 
+TemperatureFieldID = 1; 
+readAPIKey = 'XXXXXXXXXXXXXXXX';
+   
+% Read temperature data
+[temp,timeStamp] = thingSpeakRead(readChannelID,'Fields',TemperatureFieldID, ...
+                                                'numDays',1,'ReadKey',readAPIKey); 
+   
+% Calculate the maximum and minimum temperatures 
+[maxTemp,maxTempIndex] = max(temp); 
+[minTemp,minTempIndex] = min(temp); 
+avgTemp = mean(temp);
+   
+if 0
+    timeMaxTemp = timeStamp(maxTempIndex); 
+    timeMinTemp = timeStamp(minTempIndex); 
+    display(maxTemp,'Maximum Temperature for the past 24 hours is'); 
+    display(timeMaxTemp,'Maximum Timestamp is');
+    display(minTemp,'Minimum Temperature for the past 24 hours is'); 
+    display(timeMinTemp,'Minimum Timestamp is');
+    display(avgTemp,'Avg Temperature for the past 24 hours is'); 
+end
+
+% WRITE to: lida_weather_log_amp_1day
+writeChannelID = [1312844]; 
+writeAPIKey = 'YYYYYYYYYYYYYYY';
+
+tStamp = datetime('now');
+thingSpeakWrite(writeChannelID,[maxTemp, minTemp, avgTemp],'WriteKey',writeAPIKey,'TimeStamp',tStamp);

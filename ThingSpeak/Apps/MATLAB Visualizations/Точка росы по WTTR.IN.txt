@@ -1,0 +1,50 @@
+﻿% Channel: lida_weather_log_compare_10min
+readChannelID = 1312197; 
+TemperatureInetFieldID = 1; 
+HumidityInetFieldID = 2; 
+TemperatureSensorFieldID = 3; 
+HumiditySensorFieldID = 4; 
+DewPointInetFieldID = 5; 
+DewPointSensorFieldID = 6; 
+readAPIKey = 'XXXXXXXXXXXXXXXX';
+Days = 7;
+
+[data, timeStamps] = thingSpeakRead(readChannelID, 'Fields',[TemperatureInetFieldID HumidityInetFieldID TemperatureSensorFieldID HumiditySensorFieldID DewPointInetFieldID DewPointSensorFieldID], ...
+                                                           'NumDays', Days, ...
+                                                           'ReadKey', readAPIKey);
+
+temperatureInetData = data(:, 1);
+humidityInetData = data(:, 2);
+temperatureSensorData = data(:, 3);
+humiditySensorData = data(:, 4);
+DewPointInet = data(:, 5);
+DewPointSensor = data(:, 6);
+
+% Visualize Data
+yyaxis left
+newcolors = [0.5 0.2 0.2
+             0.2 0.2 0.9]
+colororder(newcolors)
+p = plot(timeStamps, [temperatureInetData, DewPointInet])
+p(1).LineWidth = 1
+p(2).LineWidth = 2
+l = ylabel('Температура')
+l.Color = [0.5 0.2 0.2]
+ax1 = gca; % current axes
+ax1.YColor = [0.5 0.2 0.2];
+
+
+yyaxis right
+newcolors = [0.2 0.9 0.2]
+colororder(newcolors)
+pd = plot(timeStamps, humidityInetData)
+pd.LineWidth = 1
+l = ylabel('Влажность')
+l.Color = [0.2 0.9 0.2]
+ax1 = gca; % current axes
+ax1.YColor = [0.2 0.9 0.2];
+
+
+legend("topleft", {'Температура','Точка росы','Влажность'})
+legend('boxoff')
+title(strcat('Точка росы за ', num2str(Days, ' %d'), ' дней (WTTR.IN)'))

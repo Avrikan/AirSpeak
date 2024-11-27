@@ -1,0 +1,12 @@
+﻿%url = 'https://i.centr.by/inforoads/en/dises/current/140';
+url = 'https://images-webcams.windy.com/45/1561347945/current/full/1561347945.jpg';
+webcam = imread(url);
+
+%options = weboptions('ContentType','image');
+%webcam = webread(url,options);
+
+%myFig = imshow(webcam);
+myFig = imshow(webcam,'border','tight');
+
+%myFig=figure( 'Position',[50 10 100 1000]);
+%title(sprintf('Last updated at: %s',datetime('now')));

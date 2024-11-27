@@ -1,0 +1,21 @@
+﻿% Channel: lida_weather_log_1min
+readAPIKey = 'XXXXXXXXXXXXXXXX';
+readChannelID = 1306405;
+TemperatureFieldID = 1;
+HumidityFieldID = 2;
+Days = 3;
+
+% Read Temperature and Humidity Data.
+data = thingSpeakRead(readChannelID,'Fields',[TemperatureFieldID HumidityFieldID], ...
+                                               'NumDays', Days, ...
+                                               'ReadKey',readAPIKey);
+
+temperatureData = data(:,1);
+humidityData = data(:,2);
+
+% Visualize the data
+figure
+scatter(temperatureData, humidityData, 40);
+xlabel('Temperature');
+ylabel('Humidity');
+title(strcat('Корреляция температуры и влажости за ', num2str(Days, ' %d'), ' дней'));

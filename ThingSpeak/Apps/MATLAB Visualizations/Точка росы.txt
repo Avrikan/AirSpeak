@@ -1,0 +1,21 @@
+﻿% Channel: lida_weather_log_compare_10min
+readChannelID = 1312197; 
+DewPointPogodaFieldID = 5; 
+DewPointSensorFieldID = 6; 
+readAPIKey = 'XXXXXXXXXXXXXXXX';
+Days = 30;
+
+[data, timeStamps] = thingSpeakRead(readChannelID, 'Fields',[DewPointPogodaFieldID DewPointSensorFieldID], ...
+                                                           'NumDays', Days, ...
+                                                           'ReadKey', readAPIKey);
+
+DewPointPogoda = data(:, 1);
+DewPointSensor = data(:, 2);
+
+% Visualize Data
+p = plot(timeStamps, [DewPointPogoda, DewPointSensor])
+l = ylabel('Температура')
+
+legend("topleft", {'WTTR.IN','SENSOR'})
+legend('boxoff')
+title(strcat('Точка росы за ', num2str(Days, ' %d'), ' дней'))

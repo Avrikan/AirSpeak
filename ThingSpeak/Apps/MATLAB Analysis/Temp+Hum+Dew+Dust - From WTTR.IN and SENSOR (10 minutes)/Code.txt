@@ -1,0 +1,68 @@
+% SENSOR
+readChannelID = 1306405; 
+TemperatureFieldID = 1; 
+HumidityFieldID = 2; 
+PM01FieldID = 4;
+PM25FieldID = 5;
+PM10FieldID = 6;
+readAPIKey = 'XXXXXXXXXXXXXXXX';
+Minutes = 10;
+
+[data, timeStamps] = thingSpeakRead(readChannelID, 'Fields',[TemperatureFieldID HumidityFieldID PM01FieldID PM25FieldID PM10FieldID], ...
+                                                           'NumMinutes', Minutes, ...
+                                                           'ReadKey', readAPIKey);
+
+
+% POGODA.BY
+% url = 'https://pogoda.by/rss/weather?station=26832';
+% webText = webread(url);
+% TemperaturePogoda = urlfilter(webText, 'Температура', 1, "forward");
+% HumidityPogoda = urlfilter(webText, '');
+
+% wttr.in
+url = 'https://wttr.in/Lida+Belarus?format=p1';
+webText = webread(url);
+    display(webText,'webText'); 
+TemperaturePogoda = urlfilter(webText, 'temperature_celsius');
+HumidityPogoda = urlfilter(webText, 'humidity_percentage');
+
+if 1
+    display(TemperaturePogoda,'Temperature from Pogoda.by'); 
+    display(HumidityPogoda,'Humidity from Pogoda.by');
+end
+
+
+%CALCULATE
+tStamp = datetime('now');
+temperatureMeanData = mean(data(:, 1));
+humidityMeanData = mean(data(:, 2));
+Dust01 = mean(data(:, 3));
+Dust25 = mean(data(:, 4));
+Dust10 = mean(data(:, 5));
+DustAverageSumm = Dust01 + Dust25 + Dust10; 
+
+
+b = 17.62;
+c = 243.5;
+
+% CALCULATE DEW POINT POGODA.BY
+temp = TemperaturePogoda;
+humidity = HumidityPogoda;
+gamma = log(humidity/100) + b*temp./(c+temp);
+dewPoint = c*gamma./(b-gamma);
+dewPointPogoda = dewPoint;
+
+% CALCULATE DEW POINT SENSOR
+temp = temperatureMeanData;
+humidity = humidityMeanData;
+gamma = log(humidity/100) + b*temp./(c+temp);
+dewPoint = c*gamma./(b-gamma);
+dewPointSensor = dewPoint;
+
+% display(tStamp, 'TimeStamp');
+
+% WRITE
+writeChannelID = 1312197;
+writeAPIKey = 'YYYYYYYYYYYYYYY';
+
+thingSpeakWrite(writeChannelID,[TemperaturePogoda, HumidityPogoda, temperatureMeanData, humidityMeanData, dewPointPogoda, dewPointSensor DustAverageSumm],'WriteKey',writeAPIKey,'TimeStamp',tStamp);

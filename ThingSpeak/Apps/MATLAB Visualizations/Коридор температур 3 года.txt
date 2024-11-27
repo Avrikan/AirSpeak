@@ -1,0 +1,57 @@
+﻿% Channel: lida_weather_log_amp_1day
+readAPIKey = 'XXXXXXXXXXXXXXXX';
+readChannelID = 1312844;
+FieldID4 = 1;
+FieldID5 = 2;
+FieldID6 = 3;
+% 3 years
+Days = 1095;
+
+[data1, time1] = thingSpeakRead(readChannelID, 'Fields', FieldID4, 'NumDays', Days, 'ReadKey', readAPIKey);
+[data2, time2] = thingSpeakRead(readChannelID, 'Fields', FieldID5, 'NumDays', Days, 'ReadKey', readAPIKey);
+[data3, time3] = thingSpeakRead(readChannelID, 'Fields', FieldID6, 'NumDays', Days, 'ReadKey', readAPIKey);
+
+if 0
+    display([data1, data2, data3]);
+    display(time1);
+end
+
+data1clean = smoothdata(data1,'movmean',100);
+data2clean = smoothdata(data2,'movmean',100);
+data3clean = smoothdata(data3,'movmean',100);
+
+
+figure
+% plot(time1, [data1clean, data2clean, data3clean]);
+p = plot(time1, [data1, data2, data2clean]);
+p(1).LineWidth = 1
+p(2).LineWidth = 1
+p(3).LineWidth = 3
+
+legend({'max','min','avg'});
+title(strcat('Амплитуды за ', num2str(3, ' %d'), ' года'));
+
+% Visualize the data
+ newcolors = [0.6 0.2 0.2,
+             0.2 0.2 0.6,
+             0.2 0.6 0.2];
+ colororder(newcolors);
+
+
+
+% Calculate the maximum and minimum temperatures
+[maxTemp,maxTempIndex] = max(data1);
+[minTemp,minTempIndex] = min(data2);
+
+timeMaxTemp = time1(maxTempIndex);
+timeMinTemp = time2(minTempIndex);
+
+if 0
+    display(timeMaxTemp);
+    display(timeMinTemp);
+end
+
+txt1 = ['Максимальная температура: ' num2str(maxTemp, 2) '°C'];
+text(1, 55, txt1)
+txt2 = ['Минимальная температура: ' num2str(minTemp, 2) '°C'];
+text(1, -15, txt2)

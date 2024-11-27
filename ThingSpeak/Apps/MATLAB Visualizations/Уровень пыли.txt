@@ -1,0 +1,17 @@
+﻿% Channel: lida_weather_log_1min
+readAPIKey = 'XXXXXXXXXXXXXXXX'; 
+readChannelID = 1306405; 
+FieldID4 = 4; 
+FieldID5 = 5; 
+FieldID6 = 6; 
+Days = 7;
+
+[data1, time1] = thingSpeakRead(readChannelID, 'Fields', FieldID4, 'NumDays', Days, 'ReadKey',readAPIKey);
+[data2, time2] = thingSpeakRead(readChannelID, 'Fields', FieldID5, 'NumDays', Days, 'ReadKey',readAPIKey);
+[data3, time3] = thingSpeakRead(readChannelID, 'Fields', FieldID6, 'NumDays', Days, 'ReadKey',readAPIKey);
+area(time1, [data1, data2, data3], 'LineStyle', ':');
+
+%xlabel('Time');
+%ylabel('Dust');
+legend({'1','2.5','10'});
+title(strcat('Уровень пыли за ', num2str(Days, ' %d'), ' дней'));

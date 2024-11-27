@@ -1,0 +1,34 @@
+﻿% Channel: lida_weather_log_amp_1day
+readAPIKey = 'XXXXXXXXXXXXXXXX';
+readChannelID = 1312844;
+FieldID4 = 1;
+FieldID5 = 2;
+FieldID6 = 3;
+Days = 365;
+
+[data1, time1] = thingSpeakRead(readChannelID, 'Fields', FieldID4, 'NumDays', Days, 'ReadKey',readAPIKey);
+[data2, time2] = thingSpeakRead(readChannelID, 'Fields', FieldID5, 'NumDays', Days, 'ReadKey',readAPIKey);
+[data3, time3] = thingSpeakRead(readChannelID, 'Fields', FieldID6, 'NumDays', Days, 'ReadKey',readAPIKey);
+
+newcolors = [1.0 0.0 1.0
+             1.0 0.0 1.0
+             1.0 1.0 0.0];
+colororder(newcolors);
+
+if 0
+    display([data1, data2, data3]);
+    display(time1);
+end
+
+area(time1,data1,'FaceColor',[0.9 0.6 0.6],'EdgeColor','r');
+hold on
+area(time1,data2,'FaceColor',[1.0 1.0 1.0],'EdgeColor','r');
+hold off
+hold on
+a = area(time1,data3,'FaceColor',[1.0 1.0 1.0],'EdgeColor','r');
+a.FaceAlpha = 0.0;
+hold off
+
+
+%legend({'max','min','avg'});
+title(strcat('Коридор температур за ', num2str(Days, ' %d'), ' дней'));

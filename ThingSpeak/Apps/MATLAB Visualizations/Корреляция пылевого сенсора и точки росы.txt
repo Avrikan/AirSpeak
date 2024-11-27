@@ -1,0 +1,46 @@
+﻿% Channel: lida_weather_log_compare_10min
+% DEW POINT & DUST
+readChannelID = 1312197;
+HumiditySensorFieldID = 4;
+DewPointSensorFieldID = 6;
+DustAverageSummID = 7;
+readAPIKey = 'XXXXXXXXXXXXXXXX';
+Days = 90;
+
+[data, timeStamps] = thingSpeakRead(readChannelID, 'Fields',[HumiditySensorFieldID DewPointSensorFieldID DustAverageSummID], ...
+                                                           'NumDays', Days, ...
+                                                           'ReadKey', readAPIKey);
+
+HumiditySensor = data(:, 1);
+DewPointSensor = data(:, 2);
+DustAverageSumm = data(:, 3);
+
+
+% Visualize Data
+yyaxis left
+newcolors = [0.2 0.9 0.2
+             0.2 0.2 0.9]
+colororder(newcolors)
+p = plot(timeStamps, [HumiditySensor, DewPointSensor*20])
+p(1).LineWidth = 1
+p(2).LineWidth = 1
+l = ylabel('Конденсация')
+l.Color = [0.2 0.8 0.8]
+ax1 = gca; % current axes
+ax1.YColor = [0.2 0.8 0.8];
+
+
+yyaxis right
+newcolors = [0.9 0.2 0.2]
+colororder(newcolors)
+pd = plot(timeStamps, DustAverageSumm)
+pd.LineWidth = 1
+l = ylabel('Пыль')
+l.Color = [0.9 0.2 0.2]
+ax1 = gca; % current axes
+ax1.YColor = [0.9 0.2 0.2];
+
+%ylabel('Dust');
+legend({'Влажность','Точка росы (*20)','Суммарный уровень пыли'});
+legend('boxoff')
+title(strcat('Корреляция за ', num2str(Days, ' %d'), ' дней '));

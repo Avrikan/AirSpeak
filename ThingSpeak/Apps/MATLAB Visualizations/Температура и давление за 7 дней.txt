@@ -1,0 +1,27 @@
+﻿% Channel: lida_weather_log_1min
+readChannelID = 1306405; 
+TemperatureFieldID = 1; 
+PressureFieldID = 3; 
+readAPIKey = 'XXXXXXXXXXXXXXXX';
+Days = 7;
+
+% Read Data
+[data, timeStamps] = thingSpeakRead(readChannelID, 'Fields',[TemperatureFieldID PressureFieldID], ...
+                                                           'NumDays', Days, ...
+                                                           'ReadKey', readAPIKey);
+
+temperatureData = smoothdata(data(:, 1),'movmean',100);
+pressureData = smoothdata(data(:, 2),'movmean',100);
+
+% Visualize Data
+newcolors = [0.6 0.2 0.2
+             0.2 0.2 0.6];
+colororder(newcolors);
+
+yyaxis left
+plot(timeStamps, temperatureData);
+ylabel('Temperature');
+
+yyaxis right
+plot(timeStamps, pressureData);
+ylabel('Pressure');

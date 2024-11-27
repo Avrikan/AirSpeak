@@ -1,0 +1,17 @@
+﻿% Channel: lida_weather_log_1min
+readAPIKey = 'XXXXXXXXXXXXXXXX';
+readChannelID = 1306405;
+fieldID4 = 4;
+fieldID5 = 5;
+fieldID6 = 6;
+Days = 3;
+
+[data,timestamps] = thingSpeakRead(readChannelID, 'Fields', [fieldID4 fieldID5 fieldID6], 'NumDays', Days, 'Readkey', readAPIKey);
+
+meanData = mean(data);
+pie(meanData);
+summary = table(meanData);
+
+colormap([0.8 0.8 0.8;              0.6 0.6 0.6;              0.4 0.4 0.4]);
+legend({'1','2.5','10'});
+title(strcat('Соотношение колличества частиц по размеру за ', num2str(Days, ' %d'), ' дней'));
