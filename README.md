@@ -146,7 +146,9 @@ Fields:
 | Суточный срез амплитудных значений | Daily | Calculate high and low 24h temperatures and write to channel "1day" |
 
 ### MATLAB Analysis - аналитика 
-В рамках этого проекта аналитика содержит два кода:
+Коды аналитики собраны в файлах, котрые можно найти по этому пути - [https://github.com/Avrikan/AirSpeak/tree/main/ThingSpeak/Apps/MATLAB Analysis](https://github.com/Avrikan/AirSpeak/tree/main/ThingSpeak/Apps/MATLAB%20Analysis)
+
+В рамках этого проекта аналитика содержит всего два кода:
 
 #### 1. Temp+Hum+Dew+Dust - From WTTR.IN and SENSOR (10 minutes)
 Запускается по таймеру в 10 минут.\
@@ -207,6 +209,7 @@ flowchart TD
 
 ### MATLAB Visualizations - визуализация
 Визуализация реализована в виде виджетов и графиков. Визуализация может быть приватной и публичной. Коды предоставлены в репозитории в соответствующих файлах по этому пути - [https://github.com/Avrikan/AirSpeak/tree/main/ThingSpeak/Apps/MATLAB Visualizations](https://github.com/Avrikan/AirSpeak/tree/main/ThingSpeak/Apps/MATLAB%20Visualizations)
+
 Результаты можно посмотреть в моём публичном канале [lida_weather_log_1min](https://thingspeak.mathworks.com/channels/1306405) 
 ![image_2.png](https://github.com/Avrikan/AirSpeak/blob/main/images/image_2.png)
 
