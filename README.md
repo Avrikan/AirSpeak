@@ -45,7 +45,7 @@
 
 Для отправки данных на сервис используется API-интерфейс. GET-запрос содержит API-Key и данные. Ключи для записи и чтения различные, их можно найти в настройках канала. 
 
-![8a77279a7bd4657a8c523.png](https://github.com/Avrikan/AirSpeak/tree/main/images/8a77279a7bd4657a8c523.png)
+![8a77279a7bd4657a8c523.png](https://github.com/Avrikan/AirSpeak/blob/main/images/8a77279a7bd4657a8c523.png)
 
 Формат GET-запроса выглядит следующим образом: 
 
