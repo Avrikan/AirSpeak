@@ -41,11 +41,11 @@
 
 Для начала работы с сервисом необходимо пройти регистрацию, создать канал и заполнить поля в нём. 
 
-![29f34dcb43c42a9c7c2e4.png](29f34dcb43c42a9c7c2e4.png)
+![29f34dcb43c42a9c7c2e4.png](https://github.com/Avrikan/AirSpeak/tree/main/images/29f34dcb43c42a9c7c2e4.png)
 
 Для отправки данных на сервис используется API-интерфейс. GET-запрос содержит API-Key и данные. Ключи для записи и чтения различные, их можно найти в настройках канала. 
 
-![8a77279a7bd4657a8c523.png](8a77279a7bd4657a8c523.png)
+![8a77279a7bd4657a8c523.png](https://github.com/Avrikan/AirSpeak/tree/main/images/8a77279a7bd4657a8c523.png)
 
 Формат GET-запроса выглядит следующим образом: 
 
@@ -208,7 +208,7 @@ flowchart TD
 ### MATLAB Visualizations - визуализация
 Визуализация реализована в виде виджетов и графиков. Визуализация может быть приватной и публичной. Коды предоставлены в репозитории в соответствующих файлах. 
 Результаты можно посмотреть в моём публичном канале [lida_weather_log_1min](https://thingspeak.mathworks.com/channels/1306405) 
-![image_2.png](image_2.png)
+![image_2.png](https://github.com/Avrikan/AirSpeak/tree/main/images/image_2.png)
 
 # Эталон
 Конкретно мой сенсор в летние денёчки попадает сутра под солнышко и люто врёт по температуре в первой половине дня.
@@ -241,12 +241,12 @@ RSS-данные для Лиды выглядят так [https://pogoda.by/rss/
 </rss>
 ```
 ## i.centr.by
-![image.png](image.png)
+![image.png](https://github.com/Avrikan/AirSpeak/tree/main/images/image.png)
 
 Хорошую оперативность данных с точностью до сотых показывает ресурс [i.centr.by](https://i.centr.by/inforoads/ru/dises/current), но и его парсить оказалось проблематично.
 
 ## wttr.in
-![image_1.png](image_1.png)
+![image_1.png](https://github.com/Avrikan/AirSpeak/tree/main/images/image_1.png)
 
 Таким образом в качестве эталона был выбран ресурс `wttr.in` удобство работы с которым очень радует.
 У ресурса [wttr.in](https://wttr.in/) есть [репозиторий на GitHub](https://github.com/chubin/wttr.in).
